@@ -20,6 +20,9 @@ mpdwidth    = 100
 space = wibox.widget.textbox()
 space:set_text(" ")
 
+separator = wibox.widget.imagebox()
+separator:set_image(beautiful.widget_sep)
+
 comma = wibox.widget.textbox()
 comma:set_markup(",")
 

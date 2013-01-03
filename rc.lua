@@ -72,7 +72,7 @@ naughty.config.defaults.position = "top_right"
 naughty.config.defaults.margin = 8
 naughty.config.defaults.gap = 1
 naughty.config.defaults.ontop = true
-naughty.config.defaults.font = "Monaco 18"
+naughty.config.defaults.font = "Terminus 12"
 naughty.config.defaults.icon = nil
 naughty.config.defaults.icon_size = 256
 naughty.config.defaults.fg = beautiful.fg_tooltip
@@ -93,7 +93,7 @@ end
 -- {{{ Tags
 tags = {
   names = { "term" },
-  layouts = { layouts[2] }
+  layouts = { layouts[3] }
 }
 for s = 1, screen.count() do
   tags[s] = awful.tag(tags.names, s, tags.layouts)
@@ -146,28 +146,30 @@ for s = 1, screen.count() do
   left_wibox:add(space)
 
   local right_wibox = wibox.layout.fixed.horizontal()
+  right_wibox:add(separator)
   right_wibox:add(cpugraph0)
   right_wibox:add(cpupct0)
   right_wibox:add(cpugraph1)
   right_wibox:add(cpupct1)
   right_wibox:add(cpugraph2)
   right_wibox:add(cpupct2)
-  right_wibox:add(tab)
+  right_wibox:add(separator)
   right_wibox:add(memused)
   right_wibox:add(membar)
   right_wibox:add(mempct)
-  right_wibox:add(tab)
+  right_wibox:add(separator)
   right_wibox:add(rootfsused)
   right_wibox:add(rootfsbar)
   right_wibox:add(rootfspct)
-  right_wibox:add(tab)
+  right_wibox:add(separator)
   right_wibox:add(mytextclock)
-  right_wibox:add(space)
+  right_wibox:add(separator)
   right_wibox:add(baticon)
   right_wibox:add(batpct)
+  right_wibox:add(separator)
   right_wibox:add(volicon)
   right_wibox:add(volpct)
-  right_wibox:add(volspace)
+  right_wibox:add(separator)
 
   local wibox_layout = wibox.layout.align.horizontal()
   wibox_layout:set_left(left_wibox)
@@ -229,7 +231,7 @@ globalkeys = awful.util.table.join(
 
   -- Scratch
   awful.key({ modkey }, "`", function()
-      scratch.drop("urxvtc -name scratch", "bottom", "center", 1.0, 0.40, false)
+      scratch.drop("urxvt -name scratch", "bottom", "center", 1.0, 0.40, false)
     end),
 
   -- Thunderbird
@@ -250,54 +252,6 @@ globalkeys = awful.util.table.join(
 
   -- Menubar
   awful.key({ modkey }, "r", function() menubar.show() end),
-
-  -- {{{ Pianobar
-  awful.key({ modkey }, "XF86AudioPrev", function()
-      awful.util.spawn_with_shell(pianobar_history)
-    end),
-  awful.key({ modkey }, "XF86AudioNext", function()
-      awful.util.spawn_with_shell(pianobar_next)
-    end),
-  awful.key({ modkey }, "XF86AudioPlay", function()
-      local f = io.popen("pgrep pianobar")
-      p = f:read("*line")
-      if p then
-        awful.util.spawn_with_shell(pianobar_toggle)
-      else
-        awful.util.spawn_with_shell(pianobar_screen)
-      end
-    end),
-  awful.key({ modkey, "Shift" }, "XF86AudioPlay", function()
-      awful.util.spawn_with_shell(pianobar_quit)
-    end),
-  awful.key({ modkey }, "'", function()
-      local f = io.popen("pgrep pianobar")
-      p = f:read("*line")
-      if not p then
-        awful.util.spawn_with_shell(pianobar_screen)
-      end
-      scratch.drop("xterm -name pianobar -e 'screen -x pianobar'",
-        "top", "center", 0.5, 0.2, false)
-    end),
-  awful.key({ modkey }, "=", function()
-      awful.util.spawn_with_shell(pianobar_like)
-    end),
-  awful.key({ modkey }, "-", function()
-      awful.util.spawn_with_shell(pianobar_ban)
-    end),
-  awful.key({ modkey, "Shift" }, "-", function()
-      awful.util.spawn_with_shell(pianobar_tired)
-    end),
-  awful.key({ modkey }, "[", function()
-      awful.util.spawn_with_shell(pianobar_station)
-    end),
-  awful.key({ modkey }, "]", function()
-      awful.util.spawn_with_shell(pianobar_upcoming)
-    end),
-  awful.key({ modkey }, "\\", function()
-      awful.util.spawn_with_shell(pianobar_playing)
-    end),
-  -- }}}
 
   -- {{{ Tag 0
   awful.key({ modkey }, 0,
