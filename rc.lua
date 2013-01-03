@@ -120,36 +120,6 @@ mytaglist.buttons = awful.util.table.join(
   awful.button({ }, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
   awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
 )
-mytasklist = {}
-mytasklist.buttons = awful.util.table.join(
-  awful.button({ }, 1, function(c)
-      if c == client.focus then
-        c.minimized = true
-      else
-        c.minimized = false
-        if not c:isvisible() then
-          awful.tag.viewonly(c:tags()[1])
-        end
-        client.focus = c
-        c:raise()
-      end
-    end),
-  awful.button({ }, 3, function()
-      if instance then
-        instance:hide()
-        instance = nil
-      else
-        instance = awful.menu.clients({ width=250 })
-      end
-    end),
-  awful.button({ }, 4, function()
-      awful.client.focus.byidx(1)
-      if client.focus then client.focus:raise() end
-    end),
-  awful.button({ }, 5, function()
-      awful.client.focus.byidx(-1)
-      if client.focus then client.focus:raise() end
-    end))
 
 for s = 1, screen.count() do
   mypromptbox[s] = awful.widget.prompt()
@@ -165,9 +135,6 @@ for s = 1, screen.count() do
   -- Taglist
   mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
-  -- Tasklist
-  mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
-
   -- Wibox
   mywibox[s] = awful.wibox({ position = "top", height = 16, screen = s })
 
@@ -179,6 +146,22 @@ for s = 1, screen.count() do
   left_wibox:add(space)
 
   local right_wibox = wibox.layout.fixed.horizontal()
+  right_wibox:add(cpugraph0)
+  right_wibox:add(cpupct0)
+  right_wibox:add(cpugraph1)
+  right_wibox:add(cpupct1)
+  right_wibox:add(cpugraph2)
+  right_wibox:add(cpupct2)
+  right_wibox:add(tab)
+  right_wibox:add(memused)
+  right_wibox:add(membar)
+  right_wibox:add(mempct)
+  right_wibox:add(tab)
+  right_wibox:add(rootfsused)
+  right_wibox:add(rootfsbar)
+  right_wibox:add(rootfspct)
+  right_wibox:add(tab)
+  right_wibox:add(mytextclock)
   right_wibox:add(space)
   right_wibox:add(baticon)
   right_wibox:add(batpct)
@@ -188,51 +171,10 @@ for s = 1, screen.count() do
 
   local wibox_layout = wibox.layout.align.horizontal()
   wibox_layout:set_left(left_wibox)
-  wibox_layout:set_middle(mytasklist[s])
   wibox_layout:set_right(right_wibox)
 
   mywibox[s]:set_widget(wibox_layout)
 
-  -- Graphbox
-  mygraphbox[s] = awful.wibox({ position = "bottom", height = 12, screen = s })
-
-  local left_graphbox = wibox.layout.fixed.horizontal()
-  left_graphbox:add(space)
-  left_graphbox:add(cpufreq)
-  left_graphbox:add(cpugraph0)
-  left_graphbox:add(cpupct0)
-  left_graphbox:add(cpugraph1)
-  left_graphbox:add(cpupct1)
-  left_graphbox:add(cpugraph2)
-  left_graphbox:add(cpupct2)
-  left_graphbox:add(tab)
-  left_graphbox:add(memused)
-  left_graphbox:add(membar)
-  left_graphbox:add(mempct)
-  left_graphbox:add(tab)
-  left_graphbox:add(rootfsused)
-  left_graphbox:add(rootfsbar)
-  left_graphbox:add(rootfspct)
-  left_graphbox:add(tab)
-  left_graphbox:add(txwidget)
-  left_graphbox:add(upgraph)
-  left_graphbox:add(upwidget)
-  left_graphbox:add(tab)
-  left_graphbox:add(rxwidget)
-  left_graphbox:add(downgraph)
-  left_graphbox:add(downwidget)
-
-  local right_graphbox = wibox.layout.fixed.horizontal()
-  right_graphbox:add(weather)
-  right_graphbox:add(space)
-  right_graphbox:add(mytextclock)
-  right_graphbox:add(space)
-
-  local graphbox_layout = wibox.layout.align.horizontal()
-  graphbox_layout:set_left(left_graphbox)
-  graphbox_layout:set_right(right_graphbox)
-
-  mygraphbox[s]:set_widget(graphbox_layout)
 end
 -- }}}
 
