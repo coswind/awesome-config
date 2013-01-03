@@ -40,11 +40,13 @@ end
 -- }}}
 
 -- {{{ Variables
-terminal = "urxvt"
-editor = os.getenv("EDITOR") or "vim"
-editor_cmd = terminal .. " -e " .. editor
-modkey = "Mod4"
-altkey = "Mod1"
+local terminal = "urxvt"
+local editor = os.getenv("EDITOR") or "vim"
+local editor_cmd = terminal .. " -e " .. editor
+local exec   = awful.util.spawn
+local sexec  = awful.util.spawn_with_shell
+local modkey = "Mod4"
+local altkey = "Mod1"
 -- }}}
 
 -- {{{ Layouts
@@ -281,8 +283,11 @@ globalkeys = awful.util.table.join(
       if client.focus and tags[client.focus.screen][10] then
         awful.client.toggletag(tags[client.focus.screen][10])
       end
-    end)
+    end),
   -- }}}
+
+  -- {{{ Applications
+  awful.key({ modkey }, "w", function () exec("chromium") end)
 )
 
 clientkeys = awful.util.table.join(
