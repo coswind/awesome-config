@@ -40,21 +40,9 @@ end
 -- }}}
 
 -- {{{ Variables
-terminal = "urxvtc"
+terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
-pianobar_cmd = os.getenv("HOME") .. "/.config/pianobar/control-pianobar.sh "
-pianobar_toggle   = pianobar_cmd .. "p"
-pianobar_next     = pianobar_cmd .. "n"
-pianobar_like     = pianobar_cmd .. "l"
-pianobar_ban      = pianobar_cmd .. "b"
-pianobar_tired    = pianobar_cmd .. "t"
-pianobar_history  = pianobar_cmd .. "h"
-pianobar_upcoming = pianobar_cmd .. "u"
-pianobar_station  = pianobar_cmd .. "ss"
-pianobar_playing  = pianobar_cmd .. "c"
-pianobar_quit     = pianobar_cmd .. "q && screen -S pianobar -X quit"
-pianobar_screen   = "screen -Sdm pianobar && screen -S pianobar -X screen " .. pianobar_toggle
 modkey = "Mod4"
 altkey = "Mod1"
 -- }}}
@@ -104,29 +92,12 @@ end
 
 -- {{{ Tags
 tags = {
-  names = { "一", "二", "三", "四", "五", "六", "七", "八", "九", "十" },
-  layouts = { layouts[2], layouts[10], layouts[2], layouts[2], layouts[2],
-    layouts[1], layouts[10], layouts[1], layouts[1], layouts[1] }
+  names = { "term" },
+  layouts = { layouts[2] }
 }
 for s = 1, screen.count() do
   tags[s] = awful.tag(tags.names, s, tags.layouts)
 end
--- }}}
-
--- {{{ Shutdown
-mylauncher = wibox.widget.imagebox()
-mylauncher:set_image(beautiful.awesome_icon)
-mylauncher:buttons(awful.util.table.join(
-  awful.button({ }, 1, function()
-      awful.util.spawn_with_shell("i3lock -d -p default -c " .. beautiful.bg_focus:gsub("#",""))
-    end),
-  awful.button({ modkey }, 1, function()
-      awful.util.spawn_with_shell("reboot.sh")
-    end),
-  awful.button({ modkey }, 3, function()
-      awful.util.spawn_with_shell("shutdown.sh")
-    end)
-))
 -- }}}
 
 -- Menubar
@@ -209,11 +180,6 @@ for s = 1, screen.count() do
 
   local right_wibox = wibox.layout.fixed.horizontal()
   right_wibox:add(space)
-  if s == 1 then right_wibox:add(wibox.widget.systray()) end
-  right_wibox:add(mpdicon)
-  right_wibox:add(mpdwidget)
-  right_wibox:add(pacicon)
-  right_wibox:add(pacwidget)
   right_wibox:add(baticon)
   right_wibox:add(batpct)
   right_wibox:add(volicon)
@@ -231,7 +197,6 @@ for s = 1, screen.count() do
   mygraphbox[s] = awful.wibox({ position = "bottom", height = 12, screen = s })
 
   local left_graphbox = wibox.layout.fixed.horizontal()
-  left_graphbox:add(mylauncher)
   left_graphbox:add(space)
   left_graphbox:add(cpufreq)
   left_graphbox:add(cpugraph0)
