@@ -10,11 +10,11 @@ local beautiful = require("beautiful")
 local vicious = require("vicious")
 local naughty = require("naughty")
 
-graphwidth  = 120
+graphwidth  = 50
 graphheight = 20
-pctwidth    = 40
-netwidth    = 50
-mpdwidth    = 365
+pctwidth    = 20
+netwidth    = 30
+mpdwidth    = 100
 
 -- {{{ SPACERS
 space = wibox.widget.textbox()
@@ -27,7 +27,7 @@ pipe = wibox.widget.textbox()
 pipe:set_markup("<span color='" .. beautiful.bg_em .. "'>|</span>")
 
 tab = wibox.widget.textbox()
-tab:set_text("         ")
+tab:set_text("  ")
 
 volspace = wibox.widget.textbox()
 volspace:set_text(" ")

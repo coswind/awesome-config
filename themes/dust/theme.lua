@@ -9,7 +9,7 @@ local awful = require("awful")
 -- {{{ Main
 theme = {}
 theme.wallpaper = awful.util.getdir("config") .. "/themes/dust/Galaxy3.jpg"
-theme.font = "ubuntu mono 18"
+theme.font = "Terminus 10"
 -- }}}
 
 -- {{{ Colors
