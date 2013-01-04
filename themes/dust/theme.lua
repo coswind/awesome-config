@@ -1,9 +1,3 @@
------------------------
---  AwesomeWM theme  --
--- based on Dust GTK --
---   <tdy@gmx.com>   --
------------------------
-
 local awful = require("awful")
 
 -- {{{ Main
@@ -18,20 +12,20 @@ theme.fg_normal  = "#aaaaaa"
 theme.fg_focus   = "#111111"
 theme.fg_urgent  = "#ffffff"
 theme.fg_tooltip = "#1a1a1a"
-theme.fg_em      = "#d6d6d6"
+theme.fg_em      = "#73afb4"
 
-theme.bg_normal  = "#1a1a1a"
+theme.bg_normal  = "#262626"
 theme.bg_focus   = "#908884"
 theme.bg_urgent  = "#cd7171"
-theme.bg_tooltip = "#d6d6d6"
+theme.bg_tooltip = "#329bcd"
 theme.bg_em      = "#5a5a5a"
 theme.bg_systray = theme.bg_normal
 
-theme.fg_widget        = "#908884"
-theme.fg_center_widget = "#636363"
-theme.fg_end_widget    = "#1a1a1a"
-theme.bg_widget        = "#2a2a2a"
-theme.border_widget    = "#3F3F3F"
+theme.fg_widget        = "#666666"
+theme.fg_center_widget = "#666666"
+theme.fg_end_widget    = "#666666"
+theme.bg_widget        = "#1A1A1A"
+theme.border_widget    = "#9BCD32"
 -- }}}
 
 -- {{{ Borders

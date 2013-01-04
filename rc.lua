@@ -111,7 +111,7 @@ end
 menubar.utils.terminal = terminal
 
 -- Clock
-mytextclock = awful.widget.textclock("<span color='" .. beautiful.fg_em .. "'>%a %m/%d</span> @ %I:%M %p")
+mytextclock = awful.widget.textclock("<span color='" .. beautiful.fg_em .. "'> %a %m/%d</span> @ %I:%M %p ")
 
 -- {{{ Wiboxes
 mywibox = {}
@@ -149,30 +149,23 @@ for s = 1, scount do
     left_wibox:add(space)
 
     local right_wibox = wibox.layout.fixed.horizontal()
-    right_wibox:add(separator)
     right_wibox:add(cpugraph0)
     right_wibox:add(cpupct0)
     right_wibox:add(cpugraph1)
     right_wibox:add(cpupct1)
     right_wibox:add(cpugraph2)
     right_wibox:add(cpupct2)
-    right_wibox:add(separator)
     right_wibox:add(memused)
     right_wibox:add(membar)
     right_wibox:add(mempct)
-    right_wibox:add(separator)
     right_wibox:add(rootfsused)
     right_wibox:add(rootfsbar)
     right_wibox:add(rootfspct)
-    right_wibox:add(separator)
     right_wibox:add(mytextclock)
-    right_wibox:add(separator)
     right_wibox:add(baticon)
     right_wibox:add(batpct)
-    right_wibox:add(separator)
     right_wibox:add(volicon)
     right_wibox:add(volpct)
-    right_wibox:add(separator)
 
     local wibox_layout = wibox.layout.align.horizontal()
     wibox_layout:set_left(left_wibox)
