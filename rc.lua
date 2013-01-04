@@ -1,20 +1,20 @@
------------------------------
--- AwesomeWM configuration --
---       version 3.5       --
---      <tdy@gmx.com>      --
------------------------------
-
+-- {{{ Standard Awesome Libraries
 local gears = require("gears")
 local awful = require("awful")
 awful.rules = require("awful.rules")
 require("awful.autofocus")
+-- Widget and Layout library
 local wibox = require("wibox")
+-- Theme hanling library
 local beautiful = require("beautiful")
 beautiful.init(awful.util.getdir("config") .. "/themes/dust/theme.lua")
+-- Naughty & Menubar & Vicious
 local naughty = require("naughty")
 local menubar = require("menubar")
 local vicious = require("vicious")
+-- Widgets
 local wi = require("wi")
+-- }}}
 
 -- {{{ Error handling
 -- Startup
@@ -40,13 +40,17 @@ end
 -- }}}
 
 -- {{{ Variables
-local terminal = "urxvt"
-local editor = os.getenv("EDITOR") or "vim"
+local altkey     = "Mod1"
+local modkey     = "Mod4"
+
+local terminal   = "urxvt"
+local editor     = os.getenv("EDITOR") or "vim"
 local editor_cmd = terminal .. " -e " .. editor
-local exec   = awful.util.spawn
-local sexec  = awful.util.spawn_with_shell
-local modkey = "Mod4"
-local altkey = "Mod1"
+
+local home       = os.getenv("HOME")
+local exec       = awful.util.spawn
+local sexec      = awful.util.spawn_with_shell
+local scount     = screen.count()
 -- }}}
 
 -- {{{ Layouts
@@ -55,32 +59,32 @@ local layouts =
   awful.layout.suit.floating,
   awful.layout.suit.tile,
   awful.layout.suit.tile.left,
-  awful.layout.suit.tile.bottom,
-  awful.layout.suit.tile.top,
-  awful.layout.suit.fair,
-  awful.layout.suit.fair.horizontal,
-  awful.layout.suit.spiral,
-  awful.layout.suit.spiral.dwindle,
-  awful.layout.suit.max,
-  awful.layout.suit.max.fullscreen,
-  awful.layout.suit.magnifier
+--  awful.layout.suit.tile.bottom,
+--  awful.layout.suit.tile.top,
+--  awful.layout.suit.fair,
+--  awful.layout.suit.fair.horizontal,
+--  awful.layout.suit.spiral,
+--  awful.layout.suit.spiral.dwindle,
+--  awful.layout.suit.max,
+--  awful.layout.suit.max.fullscreen,
+--  awful.layout.suit.magnifier
 }
 -- }}}
 
 -- {{{ Naughty presets
-naughty.config.defaults.timeout = 5
-naughty.config.defaults.screen = 1
-naughty.config.defaults.position = "top_right"
-naughty.config.defaults.margin = 8
-naughty.config.defaults.gap = 1
-naughty.config.defaults.ontop = true
-naughty.config.defaults.font = "Terminus 12"
-naughty.config.defaults.icon = nil
-naughty.config.defaults.icon_size = 256
-naughty.config.defaults.fg = beautiful.fg_tooltip
-naughty.config.defaults.bg = beautiful.bg_tooltip
-naughty.config.defaults.border_color = beautiful.border_tooltip
-naughty.config.defaults.border_width = 2
+naughty.config.defaults.timeout       = 5
+naughty.config.defaults.screen        = 1
+naughty.config.defaults.position      = "top_right"
+naughty.config.defaults.margin        = 8
+naughty.config.defaults.gap           = 1
+naughty.config.defaults.ontop         = true
+naughty.config.defaults.font          = "Terminus 12"
+naughty.config.defaults.icon          = nil
+naughty.config.defaults.icon_size     = 256
+naughty.config.defaults.fg            = beautiful.fg_tooltip
+naughty.config.defaults.bg            = beautiful.bg_tooltip
+naughty.config.defaults.border_color  = beautiful.border_tooltip
+naughty.config.defaults.border_width  = 2
 naughty.config.defaults.hover_timeout = nil
 -- }}}
 
@@ -118,9 +122,7 @@ mytaglist.buttons = awful.util.table.join(
   awful.button({ }, 1, awful.tag.viewonly),
   awful.button({ modkey }, 1, awful.client.movetotag),
   awful.button({ }, 3, awful.tag.viewtoggle),
-  awful.button({ modkey }, 3, awful.client.toggletag),
-  awful.button({ }, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
-  awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
+  awful.button({ modkey }, 3, awful.client.toggletag)
 )
 
 for s = 1, screen.count() do
@@ -130,9 +132,7 @@ for s = 1, screen.count() do
   mylayoutbox[s] = awful.widget.layoutbox(s)
   mylayoutbox[s]:buttons(awful.util.table.join(
       awful.button({ }, 1, function() awful.layout.inc(layouts, 1) end),
-      awful.button({ }, 3, function() awful.layout.inc(layouts, -1) end),
-      awful.button({ }, 4, function() awful.layout.inc(layouts, 1) end),
-      awful.button({ }, 5, function() awful.layout.inc(layouts, -1) end)))
+      awful.button({ }, 3, function() awful.layout.inc(layouts, -1) end)))
 
   -- Taglist
   mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
@@ -184,19 +184,13 @@ end
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-  awful.key({ modkey, }, "Left", awful.tag.viewprev ),
-  awful.key({ modkey, }, "Right", awful.tag.viewnext ),
-  awful.key({ modkey, }, "Escape", awful.tag.history.restore),
-
-  awful.key({ altkey, }, "Tab",
-    function()
-      awful.client.focus.byidx( 1)
-      if client.focus then client.focus:raise() end
+    awful.key({ modkey }, "j", function()
+        awful.client.focus.byidx( 1)
+        if client.focus then client.focus:raise() end
     end),
-  awful.key({ modkey, "Shift" }, "Tab",
-    function()
-      awful.client.focus.byidx(-1)
-      if client.focus then client.focus:raise() end
+    awful.key({ modkey }, "k", function()
+        awful.client.focus.byidx(-1)
+        if client.focus then client.focus:raise() end
     end),
 
   -- Layout manipulation
