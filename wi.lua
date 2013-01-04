@@ -41,12 +41,6 @@ volspace:set_text(" ")
 vicious.cache(vicious.widgets.cpu)
 vicious.cache(vicious.widgets.cpuinf)
 
--- Core 0 freq
-cpufreq = wibox.widget.textbox()
-vicious.register(cpufreq, vicious.widgets.cpuinf, function(widget, args)
-    return string.format("<span color='" .. beautiful.fg_em .. "'>cpu</span>%1.1fGHz", args["{cpu0 ghz}"])
-end, 3000)
-
 -- Core 0 graph
 cpugraph0 = awful.widget.graph()
 cpugraph0:set_width(graphwidth):set_height(graphheight)
@@ -183,113 +177,6 @@ rootfspct.width = pctwidth
 vicious.register(rootfspct, vicious.widgets.fs, "${/ used_p}%", 97)
 -- }}}
 
--- {{{ NETWORK
--- Cache
-vicious.cache(vicious.widgets.net)
-
--- Up graph
-upgraph = awful.widget.graph()
-upgraph:set_width(graphwidth):set_height(graphheight)
-upgraph:set_border_color(nil)
-upgraph:set_background_color(beautiful.bg_widget)
-upgraph:set_color({
-    type = "linear",
-    from = { 0, graphheight },
-    to = { 0, 0 },
-    stops = {
-        { 0, beautiful.fg_widget },
-        { 0.25, beautiful.fg_center_widget },
-        { 1, beautiful.fg_end_widget }
-    }})
-vicious.register(upgraph, vicious.widgets.net, "${eth0 up_kb}")
-
--- TX
-txwidget = wibox.widget.textbox()
-vicious.register(txwidget, vicious.widgets.net,
-  "<span color='" .. beautiful.fg_em .. "'>up</span>${eth0 tx_mb}MB", 19)
-
--- Up speed
-upwidget = wibox.widget.textbox()
-upwidget.fit = function(box,w,h)
-    local w,h = wibox.widget.textbox.fit(box,w,h) return math.max(netwidth,w),h
-end
-vicious.register(upwidget, vicious.widgets.net, "${eth0 up_kb}", 2)
-
--- Down graph
-downgraph = awful.widget.graph()
-downgraph:set_width(graphwidth):set_height(graphheight)
-downgraph:set_border_color(nil)
-downgraph:set_background_color(beautiful.bg_widget)
-downgraph:set_color({
-    type = "linear",
-    from = { 0, graphheight },
-    to = { 0, 0 },
-    stops = {
-        { 0, beautiful.fg_widget },
-        { 0.25, beautiful.fg_center_widget },
-        { 1, beautiful.fg_end_widget }
-    }})
-vicious.register(downgraph, vicious.widgets.net, "${eth0 down_kb}")
-
--- RX
-rxwidget = wibox.widget.textbox()
-vicious.register(rxwidget, vicious.widgets.net,
-  "<span color='" .. beautiful.fg_em .. "'>down</span>${eth0 rx_mb}MB", 17)
-
--- Down speed
-downwidget = wibox.widget.textbox()
-downwidget.fit = function(box,w,h)
-    local w,h = wibox.widget.textbox.fit(box,w,h) return math.max(netwidth,w),h
-end
-vicious.register(downwidget, vicious.widgets.net, "${eth0 down_kb}", 2)
--- }}}
-
--- {{{ WEATHER
-weather = wibox.widget.textbox()
-vicious.register(weather, vicious.widgets.weather,
-  "<span color='" .. beautiful.fg_em .. "'>${sky}</span> @ ${tempf}°F on",
-  1501, "XXXX")
-weather:buttons(awful.util.table.join(awful.button({ }, 1, function()
-    vicious.force({ weather })
-end)))
--- }}}
-
--- {{{ PACMAN
--- Icon
-pacicon = wibox.widget.imagebox()
-pacicon:set_image(beautiful.widget_pac)
-
--- Upgrades
-pacwidget = wibox.widget.textbox()
-vicious.register(pacwidget, vicious.widgets.pkg, function(widget, args)
-  if args[1] > 0 then
-    pacicon:set_image(beautiful.widget_pacnew)
-  else
-    pacicon:set_image(beautiful.widget_pac)
-  end
-
-  return args[1]
-end, 1801, "Arch S") -- Arch S for ignorepkg
-
--- Buttons
-function popup_pac()
-  local pac_updates = ""
-  local f = io.popen("pacman -Sup --dbpath /tmp/pacsync")
-  if f then
-    pac_updates = f:read("*a"):match(".*/(.*)-.*\n$")
-  end
-  f:close()
-
-  if not pac_updates then
-    pac_updates = "System is up to date"
-  end
-
-  naughty.notify { text = pac_updates }
-end
-pacwidget:buttons(awful.util.table.join(awful.button({ }, 1, popup_pac)))
-pacicon:buttons(pacwidget:buttons())
--- }}}
-
 -- {{{ VOLUME
 -- Cache
 vicious.cache(vicious.widgets.volume)
@@ -356,23 +243,23 @@ end, nil, "BAT1")
 
 -- Buttons
 function popup_bat()
-  local state = ""
-  if bat_state == "↯" then
-    state = "Full"
-  elseif bat_state == "↯" then
-    state = "Charged"
-  elseif bat_state == "+" then
-    state = "Charging"
-  elseif bat_state == "-" then
-    state = "Discharging"
-  elseif bat_state == "⌁" then
-    state = "Not charging"
-  else
-    state = "Unknown"
-  end
+    local state = ""
+    if bat_state == "↯" then
+        state = "Full"
+    elseif bat_state == "↯" then
+        state = "Charged"
+    elseif bat_state == "+" then
+        state = "Charging"
+    elseif bat_state == "-" then
+        state = "Discharging"
+    elseif bat_state == "⌁" then
+        state = "Not charging"
+    else
+        state = "Unknown"
+    end
 
-  naughty.notify { text = "Charge : " .. bat_charge .. "%\nState  : " .. state ..
-    " (" .. bat_time .. ")", timeout = 5, hover_timeout = 0.5 }
+    naughty.notify { text = "Charge : " .. bat_charge .. "%\nState  : " .. state ..
+        " (" .. bat_time .. ")", timeout = 5, hover_timeout = 0.5 }
 end
 batpct:buttons(awful.util.table.join(awful.button({ }, 1, popup_bat)))
 baticon:buttons(batpct:buttons())
