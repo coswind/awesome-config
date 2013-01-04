@@ -139,7 +139,10 @@ for s = 1, scount do
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
     -- Wibox
-    mywibox[s] = awful.wibox({ position = "top", height = 16, screen = s })
+    mywibox[s] = awful.wibox({ position = "top", height = 16, screen = s,
+        border_width = beautiful.border_width,
+        border_color = beautiful.border_focus
+    })
 
     local left_wibox = wibox.layout.fixed.horizontal()
     left_wibox:add(mytaglist[s])
