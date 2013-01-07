@@ -152,6 +152,7 @@ for s = 1, scount do
     left_wibox:add(space)
 
     local right_wibox = wibox.layout.fixed.horizontal()
+    right_wibox:add(mpdwidget)
     right_wibox:add(pipe)
     right_wibox:add(cpugraph0)
     right_wibox:add(cpupct0)
