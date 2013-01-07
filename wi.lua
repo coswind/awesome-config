@@ -27,7 +27,7 @@ comma = wibox.widget.textbox()
 comma:set_markup(",")
 
 pipe = wibox.widget.textbox()
-pipe:set_markup("<span color='" .. beautiful.bg_em .. "'>|</span>")
+pipe:set_markup("<span color='" .. beautiful.sep_normal .. "'> | </span>")
 
 tab = wibox.widget.textbox()
 tab:set_text("  ")
@@ -63,7 +63,7 @@ cpupct0 = wibox.widget.textbox()
 cpupct0.fit = function(box,w,h)
     local w,h = wibox.widget.textbox.fit(box,w,h) return math.max(pctwidth,w),h
 end
-vicious.register(cpupct0, vicious.widgets.cpu, "$2% ", 2)
+vicious.register(cpupct0, vicious.widgets.cpu, " $2%", 2)
 
 -- Core 1 graph
 cpugraph1 = awful.widget.graph()
@@ -87,7 +87,7 @@ cpupct1 = wibox.widget.textbox()
 cpupct1.fit = function(box,w,h)
     local w,h = wibox.widget.textbox.fit(box,w,h) return math.max(pctwidth,w),h
 end
-vicious.register(cpupct1, vicious.widgets.cpu, "$3% ", 2)
+vicious.register(cpupct1, vicious.widgets.cpu, " $3%", 2)
 
 -- Core 2 graph
 cpugraph2 = awful.widget.graph()
@@ -111,7 +111,7 @@ cpupct2 = wibox.widget.textbox()
 cpupct2.fit = function(box,w,h)
     local w,h = wibox.widget.textbox.fit(box,w,h) return math.max(pctwidth,w),h
 end
-vicious.register(cpupct2, vicious.widgets.cpu, "$4% ", 2)
+vicious.register(cpupct2, vicious.widgets.cpu, " $4%", 2)
 -- }}}
 
 -- {{{ MEMORY
@@ -121,7 +121,7 @@ vicious.cache(vicious.widgets.mem)
 -- Ram used
 memused = wibox.widget.textbox()
 vicious.register(memused, vicious.widgets.mem,
-  "<span color='" .. beautiful.fg_em .. "'> RAM </span>$2MB ", 5)
+  "<span color='" .. beautiful.fg_em .. "'>RAM </span>$2MB ", 5)
 
 -- Ram bar
 membar = awful.widget.progressbar()
@@ -143,7 +143,7 @@ vicious.register(membar, vicious.widgets.mem, "$1", 13)
 -- Ram %
 mempct = wibox.widget.textbox()
 mempct.width = pctwidth
-vicious.register(mempct, vicious.widgets.mem, "$1%", 5)
+vicious.register(mempct, vicious.widgets.mem, " $1%", 5)
 
 -- {{{ FILESYSTEM
 -- Cache
@@ -152,7 +152,7 @@ vicious.cache(vicious.widgets.fs)
 -- Root used
 rootfsused = wibox.widget.textbox()
 vicious.register(rootfsused, vicious.widgets.fs,
-  "<span color='" .. beautiful.fg_em .. "'> SSD </span>${/ used_gb}GB ", 97)
+  "<span color='" .. beautiful.fg_em .. "'>SSD </span>${/ used_gb}GB ", 97)
 
 -- Root bar
 rootfsbar = awful.widget.progressbar()
@@ -174,7 +174,7 @@ vicious.register(rootfsbar, vicious.widgets.fs, "${/ used_p}", 97)
 -- Root %
 rootfspct = wibox.widget.textbox()
 rootfspct.width = pctwidth
-vicious.register(rootfspct, vicious.widgets.fs, "${/ used_p}%", 97)
+vicious.register(rootfspct, vicious.widgets.fs, " ${/ used_p}%", 97)
 -- }}}
 
 -- {{{ VOLUME
@@ -187,7 +187,7 @@ volicon:set_image(beautiful.widget_vol)
 
 -- Volume %
 volpct = wibox.widget.textbox()
-vicious.register(volpct, vicious.widgets.volume, "$1% ", nil, "Master")
+vicious.register(volpct, vicious.widgets.volume, "$1%", nil, "Master")
 
 -- Buttons
 volicon:buttons(awful.util.table.join(
@@ -238,7 +238,7 @@ vicious.register(batpct, vicious.widgets.bat, function(widget, args)
         end
     end
 
-    return args[2] .. "% "
+    return args[2] .. "%"
 end, nil, "BAT1")
 
 -- Buttons

@@ -14,6 +14,8 @@ theme.fg_urgent  = "#ffffff"
 theme.fg_tooltip = "#1a1a1a"
 theme.fg_em      = "#73afb4"
 
+theme.sep_normal = "#666666"
+
 theme.bg_normal  = "#262626"
 theme.bg_focus   = "#908884"
 theme.bg_urgent  = "#cd7171"
@@ -21,10 +23,10 @@ theme.bg_tooltip = "#329bcd"
 theme.bg_em      = "#5a5a5a"
 theme.bg_systray = theme.bg_normal
 
-theme.fg_widget        = "#666666"
-theme.fg_center_widget = "#666666"
-theme.fg_end_widget    = "#666666"
-theme.bg_widget        = "#1A1A1A"
+theme.fg_widget        = "#3a3a3a"
+theme.fg_center_widget = "#3a3a3a"
+theme.fg_end_widget    = "#3a3a3a"
+theme.bg_widget        = "#111111"
 theme.border_widget    = "#9BCD32"
 -- }}}
 
