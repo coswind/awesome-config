@@ -4,7 +4,7 @@
 
 ##Notes:
 
-    Using awesome 3.5, and forked from [tdy](https://github.com/tdy/dots/tree/master/.config/awesome)'s confgiuration. 
+Using awesome 3.5, and forked from [tdy](https://github.com/tdy/dots/tree/master/.config/awesome)'s confgiuration. 
 
 ##Screenshots:
 
