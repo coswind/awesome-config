@@ -85,7 +85,7 @@ naughty.config.defaults.icon_size     = 256
 naughty.config.defaults.fg            = beautiful.fg_tooltip
 naughty.config.defaults.bg            = beautiful.bg_tooltip
 naughty.config.defaults.border_color  = beautiful.border_tooltip
-naughty.config.defaults.border_width  = 2
+naughty.config.defaults.border_width  = 1
 naughty.config.defaults.hover_timeout = nil
 -- }}}
 
@@ -99,8 +99,8 @@ end
 
 -- {{{ Tags
 tags = {
-    names = { "一", "二", "三" },
-    layouts = { layouts[3], layouts[1], layouts[1] }
+    names = { "一", "二", "三", "四" },
+    layouts = { layouts[3], layouts[1], layouts[1], layouts[1] }
 }
 for s = 1, scount do
     tags[s] = awful.tag(tags.names, s, tags.layouts)
