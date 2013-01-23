@@ -44,7 +44,7 @@ local altkey     = "Mod1"
 local modkey     = "Mod4"
 
 local terminal   = "urxvt"
-local browser    = "chromium"
+local browser    = "google-chrome"
 local editor     = os.getenv("EDITOR") or "vim"
 local editor_cmd = terminal .. " -e " .. editor
 
