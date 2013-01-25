@@ -11,7 +11,7 @@ theme.font      = "Terminus 10"
 theme.fg_normal  = "#aaaaaa"
 theme.fg_focus   = "#111111"
 theme.fg_urgent  = "#ffffff"
-theme.fg_tooltip = "#1a1a1a"
+theme.fg_tooltip = "#cccccc"
 theme.fg_em      = "#73afb4"
 
 theme.sep_normal = "#666666"
@@ -19,7 +19,7 @@ theme.sep_normal = "#666666"
 theme.bg_normal  = "#262626"
 theme.bg_focus   = "#908884"
 theme.bg_urgent  = "#cd7171"
-theme.bg_tooltip = "#329bcd"
+theme.bg_tooltip = "#333333"
 theme.bg_em      = "#5a5a5a"
 theme.bg_systray = theme.bg_normal
 
@@ -35,7 +35,7 @@ theme.border_width   = 1
 theme.border_normal  = "#222222"
 theme.border_focus   = "#908884"
 theme.border_marked  = "#91231c"
-theme.border_tooltip = "#444444"
+theme.border_tooltip = "#666666"
 -- }}}
 
 -- {{{ Titlebars
