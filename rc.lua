@@ -100,7 +100,7 @@ end
 -- {{{ Tags
 tags = {
     names = { "一", "二", "三", "四" },
-    layouts = { layouts[3], layouts[1], layouts[1], layouts[1] }
+    layouts = { layouts[3], layouts[1], layouts[4], layouts[4] }
 }
 for s = 1, scount do
     tags[s] = awful.tag(tags.names, s, tags.layouts)
